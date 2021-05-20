@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/friends/index.html</loc>
+    
+    <lastmod>2021-05-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/05/20/title/</loc>
+    
+    <lastmod>2021-05-20</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://example.com/link/index.html</loc>
     
     <lastmod>2021-05-20</lastmod>
@@ -30,13 +44,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/2021/05/20/title/</loc>
-    
-    <lastmod>2021-05-20</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://example.com/Gallery/index.html</loc>
     
     <lastmod>2021-05-20</lastmod>
@@ -57,13 +64,6 @@
     
   </url>
   
-  <url>
-    <loc>http://example.com/2021/05/20/hello/hello-world%20-%20%E5%89%AF%E6%9C%AC/</loc>
-    
-    <lastmod>2021-05-20</lastmod>
-    
-  </url>
-  
 
   <url>
     <loc>http://example.com/</loc>
@@ -73,6 +73,27 @@
   </url>
 
   
+  <url>
+    <loc>http://example.com/tags/Typora/</loc>
+    <lastmod>2021-05-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Markdown/</loc>
+    <lastmod>2021-05-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>http://example.com/categories/Markdown/</loc>
+    <lastmod>2021-05-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>
