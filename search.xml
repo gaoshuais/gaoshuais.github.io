@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>picture</title>
+      <link href="posts/22355/"/>
+      <url>posts/22355/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>图片测试</p><img src="/posts/22355/1.jpg" class="" title="隐秘的角落">]]></content>
+      
+      
+      <categories>
+          
+          <category> 图片 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 图片 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第一篇blog</title>
       <link href="posts/45388/"/>
       <url>posts/45388/</url>
