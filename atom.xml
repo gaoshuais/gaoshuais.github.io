@@ -3,11 +3,11 @@
   <title>Muckyou</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="http://www.muckyou.top/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="http://www.muckyou.top/"/>
   <updated>2021-05-20T14:19:53.438Z</updated>
-  <id>http://example.com/</id>
+  <id>http://www.muckyou.top/</id>
   
   <author>
     <name>Frank tan</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>第一篇blog</title>
-    <link href="http://example.com/2021/05/20/title/"/>
-    <id>http://example.com/2021/05/20/title/</id>
+    <link href="http://www.muckyou.top/2021/05/20/title/"/>
+    <id>http://www.muckyou.top/2021/05/20/title/</id>
     <published>2021-05-20T13:22:49.000Z</published>
     <updated>2021-05-20T14:19:53.438Z</updated>
     
@@ -34,19 +34,19 @@
     
     
     
-    <category term="Markdown" scheme="http://example.com/categories/Markdown/"/>
+    <category term="Markdown" scheme="http://www.muckyou.top/categories/Markdown/"/>
     
     
-    <category term="Typora" scheme="http://example.com/tags/Typora/"/>
+    <category term="Typora" scheme="http://www.muckyou.top/tags/Typora/"/>
     
-    <category term="Markdown" scheme="http://example.com/tags/Markdown/"/>
+    <category term="Markdown" scheme="http://www.muckyou.top/tags/Markdown/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://example.com/2021/05/20/hello-world/"/>
-    <id>http://example.com/2021/05/20/hello-world/</id>
+    <link href="http://www.muckyou.top/2021/05/20/hello-world/"/>
+    <id>http://www.muckyou.top/2021/05/20/hello-world/</id>
     <published>2021-05-20T01:04:01.282Z</published>
     <updated>2021-05-20T14:18:24.123Z</updated>
     
