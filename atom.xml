@@ -3,11 +3,11 @@
   <title>Muckyou</title>
   
   
-  <link href="http://www.muckyou.top/atom.xml" rel="self"/>
+  <link href="http://muckyou.moe/atom.xml" rel="self"/>
   
-  <link href="http://www.muckyou.top/"/>
+  <link href="http://muckyou.moe/"/>
   <updated>2021-05-21T11:59:31.751Z</updated>
-  <id>http://www.muckyou.top/</id>
+  <id>http://muckyou.moe/</id>
   
   <author>
     <name>Frank tan</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>picture</title>
-    <link href="http://www.muckyou.top/posts/22355/"/>
-    <id>http://www.muckyou.top/posts/22355/</id>
+    <link href="http://muckyou.moe/posts/22355/"/>
+    <id>http://muckyou.moe/posts/22355/</id>
     <published>2021-05-21T11:30:22.000Z</published>
     <updated>2021-05-21T11:59:31.751Z</updated>
     
@@ -33,17 +33,17 @@
     
     
     
-    <category term="图片" scheme="http://www.muckyou.top/categories/%E5%9B%BE%E7%89%87/"/>
+    <category term="图片" scheme="http://muckyou.moe/categories/%E5%9B%BE%E7%89%87/"/>
     
     
-    <category term="图片" scheme="http://www.muckyou.top/tags/%E5%9B%BE%E7%89%87/"/>
+    <category term="图片" scheme="http://muckyou.moe/tags/%E5%9B%BE%E7%89%87/"/>
     
   </entry>
   
   <entry>
     <title>第一篇blog</title>
-    <link href="http://www.muckyou.top/posts/45388/"/>
-    <id>http://www.muckyou.top/posts/45388/</id>
+    <link href="http://muckyou.moe/posts/45388/"/>
+    <id>http://muckyou.moe/posts/45388/</id>
     <published>2021-05-20T13:22:49.000Z</published>
     <updated>2021-05-21T03:36:10.838Z</updated>
     
@@ -57,19 +57,19 @@
     
     
     
-    <category term="Markdown" scheme="http://www.muckyou.top/categories/Markdown/"/>
+    <category term="Markdown" scheme="http://muckyou.moe/categories/Markdown/"/>
     
     
-    <category term="Typora" scheme="http://www.muckyou.top/tags/Typora/"/>
+    <category term="Typora" scheme="http://muckyou.moe/tags/Typora/"/>
     
-    <category term="Markdown" scheme="http://www.muckyou.top/tags/Markdown/"/>
+    <category term="Markdown" scheme="http://muckyou.moe/tags/Markdown/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://www.muckyou.top/posts/16107/"/>
-    <id>http://www.muckyou.top/posts/16107/</id>
+    <link href="http://muckyou.moe/posts/16107/"/>
+    <id>http://muckyou.moe/posts/16107/</id>
     <published>2021-05-20T01:04:01.282Z</published>
     <updated>2021-05-21T03:36:10.842Z</updated>
     
