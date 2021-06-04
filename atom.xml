@@ -6,7 +6,7 @@
   <link href="https://muckyou.moe/atom.xml" rel="self"/>
   
   <link href="https://muckyou.moe/"/>
-  <updated>2021-06-04T13:35:51.855Z</updated>
+  <updated>2021-06-04T13:42:25.370Z</updated>
   <id>https://muckyou.moe/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://muckyou.moe/posts/40587/"/>
     <id>https://muckyou.moe/posts/40587/</id>
     <published>2021-06-04T13:22:18.000Z</published>
-    <updated>2021-06-04T13:35:51.855Z</updated>
+    <updated>2021-06-04T13:42:25.370Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>​        我的电脑windows更新被组策略限制，找到解决方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Windows [版本 10.0.18362.1256]</span><br><span class="line">(c) 2019 Microsoft Corporation。保留所有权利。</span><br><span class="line"></span><br><span class="line">C:\Windows\system32&gt;rd /s /q <span class="string">&quot;%windir%\System32\GroupPolicyUsers&quot;</span></span><br><span class="line"></span><br><span class="line">C:\Windows\system32&gt;rd /s /q <span class="string">&quot;%windir%\System32\GroupPolicy&quot;</span></span><br><span class="line"></span><br><span class="line">C:\Windows\system32&gt;gpupdate /force</span><br><span class="line">正在更新策略...</span><br><span class="line"></span><br><span class="line">计算机策略更新成功完成。</span><br><span class="line">用户策略更新成功完成。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Windows\system32&gt;</span><br></pre></td></tr></table></figure>]]></content>
     
