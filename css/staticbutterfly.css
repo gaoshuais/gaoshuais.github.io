@@ -5,7 +5,7 @@
     --dark_page_color: rgba(18, 18, 18, 0.8)
 }
 #page-header{
-    background-image: url(https://w.wallhaven.cc/full/x1/wallhaven-x12gxl.png);
+    background-image: url(/img/wallhaven-x12gxl.png);
 }
 body {
     cursor: url(https://cdn.jsdelivr.net/npm/kang-static/Hexo/img/default.cur), default
@@ -27,7 +27,7 @@ audio {
 
 #web_bg {
      /* 背景图像的地址（url括号里）  */
-  background-image: url(https://w.wallhaven.cc/full/x1/wallhaven-x12gxl.png);
+  background-image: url(/img/wallhaven-x12gxl.png);
   /* 背景图像不重复 */
   background-repeat: no-repeat;
   /* 背景图像大小 */
@@ -2134,4 +2134,5 @@ pre[class*=language-] {
 
 .fa-heart {
     color: red
+}
 }
