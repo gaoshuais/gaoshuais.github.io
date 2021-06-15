@@ -7,6 +7,15 @@
 #page-header{
     background-image: url(/img/wallhaven-x12gxl.png);
 }
+.post-copyright{
+    background: url(https://cdn.jsdelivr.net/gh/BNDong/Cnblogs-Theme-SimpleMemory@master/img/webp/footer.webp) no-repeat 50% rgb(235, 114, 204);
+    height: /*368px*/100%;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+   /* pointer-events: none*/
+   
+}
 body {
     cursor: url(https://cdn.jsdelivr.net/npm/kang-static/Hexo/img/default.cur), default
 }
@@ -1876,6 +1885,7 @@ div.snote.error:before {
 
 #footer {
     color: #000;
+    
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     -webkit-backdrop-filter: saturate(100%) blur(5px);
@@ -1884,7 +1894,10 @@ div.snote.error:before {
 
 #footer,
 #footer:before {
-    background: hsla(0, 0%, 100%, .15)
+    
+   background: hsla(0, 0%, 100%, .15)
+  
+   /* background-image:(/img/footer.webm);*/
 }
 
 #footer #footer-wrap,
