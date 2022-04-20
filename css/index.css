@@ -2032,7 +2032,7 @@ blockquote footer cite:before {
   border-color: #ff7242;
 }
 .article-sort-item-time {
-  color: #858585;
+  color: #1b1b1b;
   font-size: 95%;
 }
 .article-sort-item-time time {
@@ -2113,7 +2113,7 @@ blockquote footer cite:before {
 }
 #page .category-lists .category-list .category-list-count {
   margin-left: 0.4rem;
-  color: #858585;
+  color: #1b1b1b;
 }
 #page .category-lists .category-list .category-list-count:before {
   content: '(';
@@ -2439,7 +2439,7 @@ blockquote footer cite:before {
   color: #49b1f5;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap {
-  color: #858585;
+  color: #1b1b1b;
   font-size: 90%;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .post-meta-date {
@@ -2464,7 +2464,7 @@ blockquote footer cite:before {
   margin: 0 0.2rem;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a {
-  color: #858585;
+  color: #1b1b1b;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a:hover {
   color: #49b1f5;
@@ -2755,7 +2755,7 @@ blockquote footer cite:before {
 #aside-content .aside-list > .aside-list-item .content > time,
 #aside-content .aside-list > .aside-list-item .content > .name {
   display: block;
-  color: #858585;
+  color: #1b1b1b;
   font-size: 85%;
 }
 #aside-content .aside-list > .aside-list-item .content > .title,
@@ -3435,8 +3435,8 @@ blockquote footer cite:before {
   top: -60px;
   z-index: 91;
   background: rgba(255,255,255,0.8);
-  -webkit-box-shadow: 0 5px 6px -5px rgba(133,133,133,0.6);
-  box-shadow: 0 5px 6px -5px rgba(133,133,133,0.6);
+  -webkit-box-shadow: 0 5px 6px -5px rgba(27,27,27,0.6);
+  box-shadow: 0 5px 6px -5px rgba(27,27,27,0.6);
   -webkit-transition: -webkit-transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   -moz-transition: -moz-transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   -o-transition: -o-transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -4337,7 +4337,7 @@ _:future,
 .post-reward .reward-main .reward-all .reward-item .post-qr-code-desc {
   padding-top: 0.4rem;
   width: 130px;
-  color: #858585;
+  color: #1b1b1b;
 }
 #rightside {
   position: fixed;
@@ -5873,7 +5873,7 @@ blockquote.pullquote.right {
   position: absolute;
   top: 0.8rem;
   right: 1rem;
-  color: #858585;
+  color: #1b1b1b;
   font-size: 1.4em;
   line-height: 1;
   cursor: pointer;

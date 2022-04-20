@@ -1,7 +1,7 @@
 #content-inner {
-    --light_bg_color: hsla(0, 0%, 100%, 0.6);
+    --light_bg_color: hsla(0, 100%, 99%, 0.829); 
     --dark_bg_color: rgba(18, 18, 18, 0.8);
-    --light_page_color: hsla(0, 0%, 100%, 0.5);
+    --light_page_color: hsla(0, 100%, 99%, 0.829); 
     --dark_page_color: rgba(18, 18, 18, 0.8)
 }
 #page-header{
