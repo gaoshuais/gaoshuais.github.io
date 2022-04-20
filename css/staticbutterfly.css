@@ -8,7 +8,7 @@
     background-image: url(/img/wallhaven-x12gxl.png);
 }
 .post-copyright{
-    background: url(https://cdn.jsdelivr.net/gh/BNDong/Cnblogs-Theme-SimpleMemory@master/img/webp/footer.webp) no-repeat 50% rgb(235, 114, 204);
+    #background: url(https://cdn.jsdelivr.net/gh/BNDong/Cnblogs-Theme-SimpleMemory@master/img/webp/footer.webp) no-repeat 50% rgb(235, 114, 204);
     height: /*368px*/100%;
     z-index: 1;
     position: absolute;

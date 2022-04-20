@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>服务器VMware紫屏问题定界工具方案 | HILL</title><meta name="keywords" content="VMware"><meta name="author" content="gaoshuai,gaoshuais@126.com"><meta name="copyright" content="gaoshuai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="服务器VMware紫屏问题定界工具方案1 前言本文的目的是对服务器VMware紫屏问题提出系统性的定界方案，支撑该类问题定界工具的开发。 VMware紫屏问题是一类较常见且难以快速定位定界的问题，主要是由于VMware系统闭源，除了参考VMware官网公开的资料以及历史处理该类问题的经验外，无法进一步解析。而服务器作为ICT基础设施的底层设备，常常需要配合定界该类问题，或澄清紫屏问题是否由硬件问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器VMware紫屏问题定界工具方案">
+<meta property="og:url" content="https://www.gaoshuais.top/posts/1686/index.html">
+<meta property="og:site_name" content="HILL">
+<meta property="og:description" content="服务器VMware紫屏问题定界工具方案1 前言本文的目的是对服务器VMware紫屏问题提出系统性的定界方案，支撑该类问题定界工具的开发。 VMware紫屏问题是一类较常见且难以快速定位定界的问题，主要是由于VMware系统闭源，除了参考VMware官网公开的资料以及历史处理该类问题的经验外，无法进一步解析。而服务器作为ICT基础设施的底层设备，常常需要配合定界该类问题，或澄清紫屏问题是否由硬件问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gaoshuais.top/img/head.jpg">
+<meta property="article:published_time" content="2022-04-20T00:10:44.000Z">
+<meta property="article:modified_time" content="2022-04-20T00:17:41.313Z">
+<meta property="article:author" content="gaoshuai">
+<meta property="article:tag" content="VMware">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gaoshuais.top/img/head.jpg"><link rel="shortcut icon" href="/img/head.jpg"><link rel="canonical" href="https://www.gaoshuais.top/posts/1686/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '服务器VMware紫屏问题定界工具方案',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-20 08:17:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/staticbutterfly.css"><link rel="stylesheet" href="/css/waifu1.css"><link rel="stylesheet" href="/css/flat-ui.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HILL" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HILL</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">服务器VMware紫屏问题定界工具方案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-20T00:10:44.000Z" title="发表于 2022-04-20 08:10:44">2022-04-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-20T00:17:41.313Z" title="更新于 2022-04-20 08:17:41">2022-04-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="服务器VMware紫屏问题定界工具方案"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="服务器VMware紫屏问题定界工具方案"><a href="#服务器VMware紫屏问题定界工具方案" class="headerlink" title="服务器VMware紫屏问题定界工具方案"></a>服务器VMware紫屏问题定界工具方案</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>本文的目的是对服务器VMware紫屏问题提出系统性的定界方案，支撑该类问题定界工具的开发。</p>
+<p>VMware紫屏问题是一类较常见且难以快速定位定界的问题，主要是由于VMware系统闭源，除了参考VMware官网公开的资料以及历史处理该类问题的经验外，无法进一步解析。而服务器作为ICT基础设施的底层设备，常常需要配合定界该类问题，或澄清紫屏问题是否由硬件问题引起。因此，为了有效提升VMware紫屏问题的定界定位能力，需要提炼出可以工具化的需求，系统性的支撑VMware紫屏定界工具的开发。</p>
+<h2 id="2-VMware系统介绍"><a href="#2-VMware系统介绍" class="headerlink" title="2 VMware系统介绍"></a>2 VMware系统介绍</h2><p>VMware vSphere 是 VMware 的虚拟化平台，可将数据中心转换为包括 CPU、存储和网络资源的聚合计算基础架构。vSphere 将这些基础架构作为一个统一的运行环境进行管理，并提供工具来管理加入该环境的数据中心。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.vmware.com/cn/VMware-vSphere/images/GUID-5EB66614-1EE8-4F39-8C8B-1E97EEE76791-high.png">https://docs.vmware.com/cn/VMware-vSphere/images/GUID-5EB66614-1EE8-4F39-8C8B-1E97EEE76791-high.png</a></p>
+<p>vSphere 的两个核心组件是 ESXi和vCenter Server。ESXi是用于创建并运行虚拟机和虚拟设备的虚拟化平台。vCenter Server是一项服务，用于管理网络中连接的多个主机，并将主机资源池化。</p>
+<h2 id="3-VMware紫屏（PSOD）解读"><a href="#3-VMware紫屏（PSOD）解读" class="headerlink" title="3 VMware紫屏（PSOD）解读"></a>3 VMware紫屏（PSOD）解读</h2><p>本章提供了解码 ESX/ESXi 主机紫色屏幕错误的相关信息。</p>
+<p>ESX/ESXi 紫色屏幕错误大致如下所示：</p>
+<img src="/posts/1686/zh-cn_image_0000001192618655.png" class="">
+
+<img src="/posts/1686/icon-note.png" class=""> **说明：**
+
+<p>本文将使用此紫色屏幕中的信息作为示例。</p>
+<h3 id="3-1-什么是VMkernel？"><a href="#3-1-什么是VMkernel？" class="headerlink" title="3.1 什么是VMkernel？"></a>3.1 什么是VMkernel？</h3><p>VMkernel就是ESX/ESXi的操作系统核心。内核负责处理资源调度和设备IO事宜。设备IO由VMware网络和存储堆栈处理，后者也是虚拟文件系统、网络设备和控制物理设备的设备驱动程序之间的层。</p>
+<h3 id="3-2-解释紫色诊断屏幕"><a href="#3-2-解释紫色诊断屏幕" class="headerlink" title="3.2 解释紫色诊断屏幕"></a>3.2 解释紫色诊断屏幕</h3><p>如果VMkernel出错，错误会显示在紫色诊断屏幕中。紫色诊断屏幕大致如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VMware ESX Server [Releasebuild-98103 PCPU 1 locked up.Failed to ack TLB invalidate. frame=0x3a37d98 ip=0x625e94 cr2=0x0 cr3=0x40c66000 cr4=0x16c es=0xffffffff ds=0xffffffff fs=0xffffffff gs=0xffffffff eax=0xffffffff ebx=0xffffffff ecx=0xffffffff edx=0xffffffff ebp=0x3a37ef4 esi=0xffffffff edi=0xffffffff err=-1 eflags=0xffffffff *0:1037/helper1-4 1:1107/vmm0:Fagi 2:1121/vmware-vm 3:1122/mks:Franc 0x3a37ef4:[0x625e94]Panic+0x17 stack: 0x833ab4, 0x3a37f10, 0x3a37f48 0x3a37f04:[0x625e94]Panic+0x17 stack: 0x833ab4, 0x1, 0x14a03a0 0x3a37f48:[0x64bfa4]TLBDoInvalidate+0x38f stack: 0x3a37f54, 0x40, 0x2 0x3a37f70:[0x66da4d]XMapForceFlush+0x64 stack: 0x0, 0x4d3a, 0x0 0x3a37fac:[0x652b8b]helpFunc+0x2d2 stack: 0x1, 0x14a4580, 0x0 0x3a37ffc:[0x750902]CpuSched_StartWorld+0x109 stack: 0x0, 0x0, 0x0 0x3a38000:[0x0]blk_dev+0xfd76461f stack: 0x0, 0x0, 0x0 VMK uptime: 7:05:43:45.014 TSC: 1751259712918392 Starting coredump to disk Starting coredump to disk Dumping using slot 1 of 1...using slot 1 of 1... log</span><br></pre></td></tr></table></figure>
+
+<p>下文会分解上述紫色诊断屏幕每个部分的内容：</p>
+<ul>
+<li><p>产品和内部版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VMware ESX Server [Releasebuild-98103]  </span><br></pre></td></tr></table></figure>
+
+<p>紫色诊断屏幕中的此部分表示出错的产品和内部版本。在本示例中，产品是 VMware ESX Server 内部版本 98103。</p>
+</li>
+<li><p>错误消息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PCPU 1 locked up.Failed to ack TLB invalidate  </span><br></pre></td></tr></table></figure>
+
+<p>紫色诊断屏幕的此部分表示报告的错误消息。只能报告有限数量的错误消息。本文稍后会讨论这些错误消息。</p>
+</li>
+<li><p>CPU寄存器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame=0x3a37d98 ip=0x625e94 cr2=0x0 cr3=0x40c66000 cr4=0x16c es=0xffffffff ds=0xffffffff fs=0xffffffff gs=0xffffffff eax=0xffffffff ebx=0xffffffff ecx=0xffffffff edx=0xffffffff ebp=0x3a37ef4 esi=0xffffffff edi=0xffffffff err=-1 eflags=0xffffffff  </span><br></pre></td></tr></table></figure>
+
+<p>出错时，这些值存储在物理 CPU 寄存器中。这些寄存器中的信息千差万别，具体取决于出现的 VMkernel 错误。这些寄存器只能用于内部调试 VMkernel 错误的核心转储。有关这些寄存器的详细信息，请参见 <a target="_blank" rel="noopener" href="http://www.intel.com/products/processor/manuals/%EF%BC%88%E9%92%88%E5%AF%B9">http://www.intel.com/products/processor/manuals/（针对</a> Intel）和 <a target="_blank" rel="noopener" href="http://support.amd.com/us/psearch/Pages/psearch.aspx%EF%BC%88%E9%92%88%E5%AF%B9">http://support.amd.com/us/psearch/Pages/psearch.aspx（针对</a> AMD）。在 AMD 网站中，搜索特定类型处理器的架构程序员手册。</p>
+</li>
+<li><p>物理CPU：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*0:1037/helper1-4 1:1107/vmm0:Fagi 2:1121/vmware-vm 3:1122/mks:Franc  </span><br></pre></td></tr></table></figure>
+
+<p>紫色诊断屏幕的此部分表示VMkernel出错期间运行指令的物理CPU。在本示例中，0 旁边的 * 表示发生故障时物理CPU 0正在运行操作。新版本 ESX 不再使用 *，而是使用前缀字母CPU。例如，如果新版本 VMware ESX 同样出现上述错误，则同一行会显示为： CPU0:1037/helper1-4 cpu1:1107/vmm0:Fagi cpu2:1121/vmware-vm cpu3:1122/mks:Franc。 紫色诊断屏幕的此部分还描述了出错时CPU上运行的环境（进程）。在上述示例中，用户环境正在运行 helper1-4。</p>
+<img src="/posts/1686/icon-note.png" class=""> **说明：**
+
+<p>进程名称可能已截断。</p>
+</li>
+<li><p>堆栈跟踪：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x3a37ef4:[0x625e94]Panic+0x17 stack: 0x833ab4, 0x3a37f10, 0x3a37f48 0x3a37f04:[0x625e94]Panic+0x17 stack: 0x833ab4, 0x1, 0x14a03a0 0x3a37f48:[0x64bfa4]TLBDoInvalidate+0x38f stack: 0x3a37f54, 0x40, 0x2 0x3a37f70:[0x66da4d]XMapForceFlush+0x64 stack: 0x0, 0x4d3a, 0x0 0x3a37fac:[0x652b8b]helpFunc+0x2d2 stack: 0x1, 0x14a4580, 0x0 0x3a37ffc:[0x750902]CpuSched_StartWorld+0x109 stack: 0x0, 0x0, 0x0 0x3a38000:[0x0]blk_dev+0xfd76461f stack: 0x0, 0x0, 0x0  </span><br></pre></td></tr></table></figure>
+
+<p>堆栈表示出错时，VMkernel正在执行的操作。在本示例中，VMkernel正在尝试清除内存页表 (TLB)。此信息是一个重要工具，有助于通过评估出错时内核所执行的操作来诊断紫色屏幕错误。</p>
+</li>
+<li><p>正常运行时间：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VMK uptime: 7:05:43:45.014 TSC: 1751259712918392  </span><br></pre></td></tr></table></figure>
+
+<p>此部分表示自上次启动以来服务器运行的时间。在本示例中，ESX 主机已运行了7天5小时43分45.014 秒。TSC值是服务器启动之后经过的CPU时钟频率循环次数。</p>
+</li>
+<li><p>核心转储：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Starting coredump to disk Starting coredump to disk Dumping using slot 1 of 1...using slot 1 of 1... log  </span><br></pre></td></tr></table></figure>
+
+<p>紫色诊断屏幕的此部分表示正复制到vmkcore分区的VMkernel内存内容。</p>
+</li>
+</ul>
+<h3 id="3-3-错误消息"><a href="#3-3-错误消息" class="headerlink" title="3.3 错误消息"></a>3.3 错误消息</h3><p>紫色屏幕生成的VMkernel错误消息可用于确定问题原因。不过，产生的错误消息数是有限的。以下是已知的VMkernel错误消息列表。</p>
+<ul>
+<li><p>类型：控制台警告</p>
+<p><strong>错误示例</strong>：COS Error: Oops</p>
+<p><strong>描述</strong>：ESX主机出现故障并在出现服务控制台警告时显示紫色屏幕。与大多数紫色屏幕错误不同的是，该错误并非由VMkernel触发。相反，它由服务控制台触发，并发生在Linux级别。这些紫色屏幕错误包含来自Linux内核的其他信息。有关控制台警告的详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1006802">Understanding an “Oops” purple diagnostic screen (1006802)</a>。</p>
+</li>
+<li><p>类型：检测信号丢失</p>
+<p><strong>错误示例</strong>：Lost Heartbeat</p>
+<p><strong>描述</strong>：ESX VMkernel 和服务控制台 Linux 内核同时在 ESX 上运行。服务控制台 Linux 内核会运行一个称为 vmnixhbd 的进程，只要 VMkernel 能够分配和释放内存页，该进程便会向 VMkernel 发送检测信号。如果在 30 分钟超时时间之前未收到检测信号，VMkernel 会触发 COS 严重错误以及表明检测信号丢失的紫色诊断屏幕。有关检测信号丢失的详细信息，请参见 <a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1009525">Understanding a “Lost Heartbeat” purple diagnostic screen (1009525)</a>。</p>
+</li>
+<li><p>类型：断言</p>
+<p><strong>错误示例</strong>：ASSERT bora/vmkernel/main/pframe_int.h:527</p>
+<p><strong>描述</strong>：断言错误属于软件错误，因为它们都与程序所基于的假设条件有关。此类型的紫色屏幕错误主要是由软件错误导致的。有关断言错误消息的详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1019956">Understanding ASSERT and NOT_IMPLEMENTED purple diagnostic screens (1019956)</a>。</p>
+</li>
+<li><p>类型：未执行</p>
+<p><strong>错误示例</strong>：NOT_IMPLEMENTED /build/mts/release/bora-84374/bora/vmkernel/main/util.c:83</p>
+<p><strong>描述</strong>：代码遇到超出设计处理范围的情形时会出现未执行错误消息。有关详细信息，请参见 <a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1019956">Understanding ASSERT and NOT_IMPLEMENTED purple diagnostic screens (1019956)</a>。</p>
+</li>
+<li><p>类型：转数已超出/可能出现死锁</p>
+<p><strong>错误示例</strong>：Spin count exceeded (iplLock) - possible deadlock</p>
+<p><strong>描述</strong>：线程尝试在代码关键部分执行时，VMware ESX 主机可能在紫色诊断屏幕上报告转数已超出且可能出现死锁。由于线程正尝试进入关键部分，因此，它需要执行自旋锁操作，以便先轮询互斥锁，然后再执行代码。线程在执行自旋锁操作期间会继续轮询互斥锁，但是，互斥锁轮询次数存在一定限制。有关转数已超出错误的详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1020105">Understanding a “Spin count exceeded” purple diagnostic screen (1020105)</a>。</p>
+</li>
+<li><p>类型：无法确认 TLB 是否失效</p>
+<p><strong>错误示例</strong>：PCPU 1 locked up.Failed to ack TLB invalidate.</p>
+<p><strong>描述</strong>：物理CPU在尝试清除内存页表时出现故障。有关详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1020214">Understanding a Failed to ack TLB invalidate purple diagnostic screen (1020214)</a>。</p>
+</li>
+</ul>
+<p>紫色诊断屏幕还会以异常的形式出现。异常处理程序是一种计算机硬件机制，旨在处理正常执行流（除零、页面错误等）发生变动的某些情形。该处理程序并无跟踪机制，因此您需要通过日志记录确定处理程序是否出现问题（或通过单步调试）。以下是常见异常列表：</p>
+<ul>
+<li><p>类型：异常13（一般保护错误）</p>
+<p><strong>错误示例</strong>：#GP Exception(13) in world 4130:helper13-0 @ 0x41803399e303</p>
+<p><strong>描述</strong>：在以下任一情况下都会出现一般保护错误（异常 13）：正在请求的页面不属于请求该页的程序（未映射到程序内存中），或者程序无权在页面上执行读取或写入操作。有关异常13或页面错误的详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1020181">Understanding Exception 13 and Exception 14 purple diagnostic screen events (1020181)</a>。</p>
+</li>
+<li><p>类型：异常14（页面错误）</p>
+<p><strong>错误示例</strong>：#PF Exception type 14 in world 136:helper0-0 @ 0x4a8e6e</p>
+<p><strong>描述</strong>：正在请求的页面未成功加载到内存时出现页面错误（异常 14）。有关异常14或页面错误的详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1020181">Understanding Exception 13 and Exception 14 purple diagnostic screen events (1020181)</a>。</p>
+</li>
+<li><p>类型：异常18（计算机检查异常）</p>
+<p><strong>错误示例</strong>：Machine Check Exception: Unable to continue</p>
+<p><strong>错误示例</strong>：Hardware (Machine) Error</p>
+<p><strong>描述</strong>：计算机检查异常 (MCE) 由硬件生成并通过主机进行报告。出现MCE事件时，请咨询您的硬件供应商。通过评估显示的信息，可以确定报告错误的单个组件。有关MCE的详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1005184">Decoding Machine Check Exception (MCE) output after a purple screen error (1005184)</a>。</p>
+</li>
+</ul>
+<p>如果VMware ESX或ESXi主机遇到类似于其中一个错误，但未指向以上参考的一般文章，请在<a target="_blank" rel="noopener" href="http://kb.vmware.com/">Knowledge Base</a>中搜索错误消息和堆栈跟踪信息。如果错误未记录在知识库中，请从VMware ESX主机收集诊断信息，然后提交支持请求。有关详细信息，请参见<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1008524">Collecting diagnostic information for VMware products (1008524)</a>和<a target="_blank" rel="noopener" href="http://www.vmware.com/support/policies/howto.html">How to Submit a Support Request</a>。</p>
+<p>有关详细信息，请参见：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1008524">Collecting diagnostic information for VMware products (1008524)</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.vmware.com/support/policies/howto.html">How to Submit a Support Request</a></li>
+</ul>
+<h3 id="3-4-模式分析"><a href="#3-4-模式分析" class="headerlink" title="3.4 模式分析"></a>3.4 模式分析</h3><p>同一 VMware ESX 主机上出现多个紫色诊断屏幕时，可以使用多个紫色诊断屏幕示例确定问题与硬件还是与软件有关。为此，请确定紫色诊断屏幕的以下部分是否存在一些模式：</p>
+<ul>
+<li><p>错误消息和堆栈跟踪：</p>
+<ul>
+<li>如果多个 vmkernel 错误中的错误消息和堆栈变化很大，则表明同一错误并不总是软件造成的。尽管不是十分确凿，但这很可能意味着硬件问题。</li>
+<li>如果多个 vmkernel 中的错误消息和堆栈始终相同，则表明同一错误都是由软件造成的。尽管不是十分确凿，但这很可能意味着软件问题。</li>
+<li>有关出现的错误消息的详细信息，请参见上述特定错误消息部分。</li>
+</ul>
+</li>
+<li><p>物理CPU：</p>
+<ul>
+<li>如果多个 vmkernel 错误中的物理 CPU 值始终相同，则表明软件总是在同一个物理 CPU 上出现错误。尽管不是十分确凿，但这很可能意味着 CPU 问题。</li>
+<li>有关详细信息，请参见 <a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/1003560">Determining if virtual machine and ESX host unresponsiveness is caused by hardware issues (1003560)</a>。</li>
+</ul>
+</li>
+<li><p>环境：</p>
+<p>如果多个 vmkernel 错误中的环境值始终相同，则表明 vmkernel 从同一环境接收指令时出现错误。尽管不是十分确凿，但这很可能意味着发送指令的环境可能触发了 VMkernel 错误。</p>
+</li>
+</ul>
+<p>Related Information</p>
+<p>以下是完整的异常列表：</p>
+<ul>
+<li>异常类型0 #DE：除法错误（Divide Error）</li>
+<li>异常类型1 #DB：调试异常</li>
+<li>异常类型2 NMI：不可屏蔽中断</li>
+<li>异常类型3 #BP：断点异常</li>
+<li>异常类型4 #OF：溢出（INTO 指令）</li>
+<li>异常类型5 #BR：界限检查（BOUND 指令）</li>
+<li>异常类型6 #UD：Opcode 无效</li>
+<li>异常类型7 #NM：协处理器不可用</li>
+<li>异常类型8 #DF：双重故障</li>
+<li>异常类型10 #TS：TSS 无效</li>
+<li>异常类型11 #NP：分段不存在</li>
+<li>异常类型12 #SS：堆栈分段错误</li>
+<li>异常类型13 #GP：一般保护错误</li>
+<li>异常类型14 #PF：页面错误</li>
+<li>异常类型16 #MF：协处理器错误</li>
+<li>异常类型17 #AC：对齐检查</li>
+<li>异常类型18 #MC：计算机检查异常</li>
+<li>异常类型19 #XF：SIMD 浮点异常</li>
+<li>异常类型20-31：预留</li>
+<li>异常类型32-255：用户定义（时钟调度程序）</li>
+</ul>
+<p>有关这些异常的详细信息，请参见<a target="_blank" rel="noopener" href="http://www.intel.com/Assets/PDF/manual/253665.pdf">Intel 64 and IA-32 Architectures Software Developer’s Manual, Volume 1: Basic Architecture</a>的<em>Call and Return Operation for Interrupt or Exception Handling Procedures</em>部分，以及<a target="_blank" rel="noopener" href="http://www.intel.com/Assets/PDF/manual/253668.pdf">Intel 64 and IA-32 Architectures Software Developer’s Manual, Volume 3A</a>的<em>Chapter 6: Interrupts and Exception Handling</em>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:gaoshuais@126.com">gaoshuai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.gaoshuais.top/posts/1686/">https://www.gaoshuais.top/posts/1686/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.gaoshuais.top" target="_blank">HILL</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/VMware/">VMware</a></div><div class="post_share"><div class="social-share" data-image="/img/head.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/62746/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">windows 镜像下载地址</div></div></a></div><div class="next-post pull-right"><a href="/posts/17395/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vSAN系统日志收集指导</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/31022/" title="VMvare的HBA卡驱动存储常见案例"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-19</div><div class="title">VMvare的HBA卡驱动存储常见案例</div></div></a></div><div><a href="/posts/2252/" title="VMware日志分析方法"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-19</div><div class="title">VMware日志分析方法</div></div></a></div><div><a href="/posts/17395/" title="vSAN系统日志收集指导"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-19</div><div class="title">vSAN系统日志收集指导</div></div></a></div><div><a href="/posts/4901/" title="vSAN磁盘offline场景操作建议指导"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-19</div><div class="title">vSAN磁盘offline场景操作建议指导</div></div></a></div><div><a href="/posts/22695/" title="VMware系统紫屏问题定位思路"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-19</div><div class="title">VMware系统紫屏问题定位思路</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">gaoshuai</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoshuais/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">随缘更新</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8VMware%E7%B4%AB%E5%B1%8F%E9%97%AE%E9%A2%98%E5%AE%9A%E7%95%8C%E5%B7%A5%E5%85%B7%E6%96%B9%E6%A1%88"><span class="toc-number">1.</span> <span class="toc-text">服务器VMware紫屏问题定界工具方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">1 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-VMware%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">2 VMware系统介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-VMware%E7%B4%AB%E5%B1%8F%EF%BC%88PSOD%EF%BC%89%E8%A7%A3%E8%AF%BB"><span class="toc-number">1.3.</span> <span class="toc-text">3 VMware紫屏（PSOD）解读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AFVMkernel%EF%BC%9F"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 什么是VMkernel？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%A7%A3%E9%87%8A%E7%B4%AB%E8%89%B2%E8%AF%8A%E6%96%AD%E5%B1%8F%E5%B9%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 解释紫色诊断屏幕</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E9%94%99%E8%AF%AF%E6%B6%88%E6%81%AF"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 错误消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 模式分析</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/62746/" title="windows 镜像下载地址">windows 镜像下载地址</a><time datetime="2022-04-20T06:47:16.000Z" title="发表于 2022-04-20 14:47:16">2022-04-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1686/" title="服务器VMware紫屏问题定界工具方案">服务器VMware紫屏问题定界工具方案</a><time datetime="2022-04-20T00:10:44.000Z" title="发表于 2022-04-20 08:10:44">2022-04-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/17395/" title="vSAN系统日志收集指导">vSAN系统日志收集指导</a><time datetime="2022-04-19T13:08:34.000Z" title="发表于 2022-04-19 21:08:34">2022-04-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4901/" title="vSAN磁盘offline场景操作建议指导">vSAN磁盘offline场景操作建议指导</a><time datetime="2022-04-19T12:36:28.000Z" title="发表于 2022-04-19 20:36:28">2022-04-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/31022/" title="VMvare的HBA卡驱动存储常见案例">VMvare的HBA卡驱动存储常见案例</a><time datetime="2022-04-19T11:18:08.000Z" title="发表于 2022-04-19 19:18:08">2022-04-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By gaoshuai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '86MGRvKe88fxFgDHAqjUQBbr-gzGzoHsz',
+      appKey: 'NCmk6LfPzxxN4NPnVFQEQ75H',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideCategory.min.js"></script> - <script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/mouse_snow.min.js"></script> - <script src="/js/live2d.min.js"></script> - <script src="/js/waifu-tips.js"></script> - <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener toc scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":180,"height":360},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
