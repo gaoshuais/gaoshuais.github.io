@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>虚拟云网络专辑｜多云时代的网络安全 | HILL</title><meta name="keywords" content="NSX-T"><meta name="author" content="gaoshuai,gaoshuais@126.com"><meta name="copyright" content="gaoshuai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="虚拟云网络专辑｜多云时代的网络安全  　　在过去的十年中，越来越多的企业开始采用多云的战略。企业逐步将工作负载部署到多个云上，这些云包括企业内部的私有云，也包括原生的公有云，甚至使用多个公有云，形成了一个混合云的架构；同时在这种混合云的架构下，云上和云下也有互通性需求，应用的部署同时利用了公有云的弹性和私有云的安全性等优势。 　　对于一个多层的应用来说，应用的前端更多的部署在公有云上，数据库部署在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟云网络专辑｜多云时代的网络安全">
+<meta property="og:url" content="https://www.gaoshuais.top/posts/59508/index.html">
+<meta property="og:site_name" content="HILL">
+<meta property="og:description" content="虚拟云网络专辑｜多云时代的网络安全  　　在过去的十年中，越来越多的企业开始采用多云的战略。企业逐步将工作负载部署到多个云上，这些云包括企业内部的私有云，也包括原生的公有云，甚至使用多个公有云，形成了一个混合云的架构；同时在这种混合云的架构下，云上和云下也有互通性需求，应用的部署同时利用了公有云的弹性和私有云的安全性等优势。 　　对于一个多层的应用来说，应用的前端更多的部署在公有云上，数据库部署在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gaoshuais.top/img/head.jpg">
+<meta property="article:published_time" content="2022-04-22T01:26:33.000Z">
+<meta property="article:modified_time" content="2022-04-22T01:32:51.021Z">
+<meta property="article:author" content="gaoshuai">
+<meta property="article:tag" content="NSX-T">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gaoshuais.top/img/head.jpg"><link rel="shortcut icon" href="/img/head.jpg"><link rel="canonical" href="https://www.gaoshuais.top/posts/59508/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '虚拟云网络专辑｜多云时代的网络安全',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-22 09:32:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/staticbutterfly.css"><link rel="stylesheet" href="/css/waifu1.css"><link rel="stylesheet" href="/css/flat-ui.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HILL" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HILL</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">虚拟云网络专辑｜多云时代的网络安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-22T01:26:33.000Z" title="发表于 2022-04-22 09:26:33">2022-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-22T01:32:51.021Z" title="更新于 2022-04-22 09:32:51">2022-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="虚拟云网络专辑｜多云时代的网络安全"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="虚拟云网络专辑｜多云时代的网络安全"><a href="#虚拟云网络专辑｜多云时代的网络安全" class="headerlink" title="虚拟云网络专辑｜多云时代的网络安全"></a>虚拟云网络专辑｜多云时代的网络安全</h1><img src="/posts/59508/640.gif" class="">
+
+<p>　　在过去的十年中，越来越多的企业开始采用多云的战略。企业逐步将工作负载部署到多个云上，这些云包括企业内部的私有云，也包括原生的公有云，甚至使用多个公有云，形成了一个混合云的架构；同时在这种混合云的架构下，云上和云下也有互通性需求，应用的部署同时利用了公有云的弹性和私有云的安全性等优势。</p>
+<p>　　对于一个多层的应用来说，应用的前端更多的部署在公有云上，数据库部署在私有云的环境中，云上和云下网络的互通采用了 site to site VPN 技术或者 AWS 的 Direct Connect 以及 Azure 的 Express Route。在这种情况下，暴露了巨大的攻击面，云上的安全威胁也会泛洪到云下的环境，所以需要在这种多云的环境下对云上和云下的工作负载进行安全防护。</p>
+<p>　　<img src="/posts/59508/640.png" class=""></p>
+<p>　　从上图可以看出，云上的攻击者向云下发起了攻击。为了避免这种攻击的发生，可以在云下对工作负载进行安全策略的部署，同时在云上通过安全组实现云上的安全策略的部署。通过这种方式虽然可以进行安全策略部署，但是运维起来非常的复杂：第一，私有云、公有云的安全策略独立规划，独立的部署，不同的管理界面，而且每朵云都有各自的管理方式，形成了架构孤岛；第二，在多云的应用场景中，由于采用不同的云基础设施，需要花费大量的时间学习这些云基础设施安全策略的特点，非常高的学习成本，同时也增加了管理成本。<strong>这是目前安全运维面临两大主要挑战</strong>。</p>
+<p> 　众所周知，<strong>VMware NSX-T Data Center 提供了在私有云环境下的网络和安全</strong>。它在几年前就开始提供在私有云环境下微分段能力，实现了 L4-L7 的安全防护能力，安全策略可以应用到虚拟机的虚拟网卡级别，并且在私有云环境下通过一个管理界面提供了网络安全策略的部署，同时通过虚拟机名称或虚拟机标记等虚拟机属性创建动态的安全组，简化了安全策略的部署以及梳理工作，也不关心应用是跑在虚拟机、容器还是物理机的环境。</p>
+<p> 　然而<strong>在多云的时代，NSX-T Data Center 也扩展到了原生的公有云</strong>，比如 AWS 和 Azure，在这种多云的环境中，我们称为 <strong>NSX Cloud</strong>。NSX Cloud 提供了一种新的多云网络安全的管理模式，为在原生公有云中运行的工作负载跨多个公有云提供一致的网络和安全策略。</p>
+<p> 　与 NSX-T Data Center 一起，我们可以获得应用到所有工作负载的网络服务和安全策略的统一视图，无论是像今天私有云中运行的虚拟机，还是运行在 AWS 和 Azure 上的工作负载。</p>
+<p>　　<img src="/posts/59508/641.png" class=""></p>
+<p>　　<strong>接下来将为大家介绍一下 NSX Cloud 的特点及使用场景，后续也会给大家介绍 NSX Cloud 组件及实现方式。</strong></p>
+<p>　　<strong>第一，NSX Cloud 使用与 NSX-T Data Center 一样的管理和控制平台。</strong></p>
+<p>　　因此在多云的环境中，只需要部署一套安全解决方案就可以管理从私有云到公有云的安全策略，安全策略只需要定义一次，就可以应用到任何位置的工作负载，包括云端、Region、AZ等。安全策略将根据应用属性和用户定义的标记以动态方式应用于每个工作负载。如下图所示：</p>
+<p>　　<img src="/posts/59508/642.png" class=""></p>
+<p>　　<strong>第二，在公有云上可以对现有的计算实例实施微段安全策略，提供 L4-L7 的状态化分布式防火墙。</strong></p>
+<p>　　在云上有多个 VPC 或 VNET 的情况下，只须在一个 VPC 或 VNET 中部署冗余的 Public Cloud Gateway（简称PCG）就可以实现整个云上的微分段安全策略，其它 VPC 或 VNET 可以共享 PCG，同时不改变云上的网络架构，支持代理模式和无代理模式，如下所示：</p>
+<p>　　<img src="/posts/59508/643.png" class=""></p>
+<p>　　<strong>第三，提供端到端运维的可见性。</strong></p>
+<p>　　可能通过 IPFIX、traceflow 和 syslog 获取流和数据包的信息，同时提供了在多云环境下的网络拓扑，如下图所示：</p>
+<p>　　<img src="/posts/59508/644.png" class=""></p>
+<p>　　<strong>我们可以通过 NSX Cloud 实现在多云环境下的安全策略的管理，那么它的架构是什么样的，具体在实际的生产环境中如何部署呢？</strong></p>
+<p>　　接下来，我们先来看一下 NSX Cloud 架构，如下图所示：</p>
+<p>　　<img src="/posts/59508/645.png" class=""></p>
+<p> 　<strong>Cloud Service Manager（CSM）</strong></p>
+<p>　　提供了私有云和公有云 VPC/VNET 以及实例的视图以及安全策略的统一视图，同时通过 CSM 在 VPC或 VNET 中部署 PCG设备（是一个虚拟机），提供 PCG 生命周期的管理，CSM 属于控制平面的组件。</p>
+<p>　　<strong>NSX Manager</strong></p>
+<p>　　提供了私有云和公有云网络和安全策略部署的统一视图，所有的策略配置都在 NSX Manager 中提供，并下发的实例运行的地方。</p>
+<p>　　<strong>Public Cloud Gateway（PCG）</strong></p>
+<p>　　它是公有云中的 NSX 本地控制平面，它是由 CSM 部署，它在 VPC/VNET 中执行资源清单的发现，也包括云中的标记的发现，以 active-standby 方式部署在云端。</p>
+<p>　　<strong>NSX Tools</strong></p>
+<p>　　属于数据平面的组件，通过它执行分布式防火墙的策略，相当于实例中的代理，PCG 做为控制平面，将 NSX Manager 中配置的安全策略下发的 NSX Tools 执行安全策略。另外，也支持无代理的方式，即不需要在计算实例中安装任何代理，PCG 通过 API 调用原生公有云安全组实现安全策略。</p>
+<p> 　接下来让我们再来看一下 NSX Cloud 在生产环境的网络拓扑以及最佳实践。如下图所示：</p>
+<p>　　<img src="/posts/59508/646.png" class=""></p>
+<p> 　<strong>要通过 NSX Cloud 交付云上云下一致的网络安全策略，需要提前做一些准备工作。</strong></p>
+<p>　　1、客户数据中心与 AWS/Azure 通过 site to site VPN 或DirectConnect/ExpressRoute 实现云上和云下的互通，以路由方式互通即可。</p>
+<p>　　2、部署 PCG 的 VPC/VNET（称为 Transit VPC/Transit VNET）创建三个 subnets，分别用于 PCG 的管理、上联和下联网络，并且要求PCG 的管理 subnet 能够访问 internet，可以通过代理或 NAT 网关实现。</p>
+<p>　　3、云上的 VPC/VNET 之间需要 Peering，或者使用 TGW/VGW 实现hub-spoken 的架构。</p>
+<p>　　4、通过 VMware 提供的脚本创建 AWS/Azure 的帐号权限。</p>
+<p>　　<strong>以上四个条件具备了之后，这时我们就可以部署 NSX Cloud 了。</strong></p>
+<p>　　部署步骤如下：</p>
+<p>　　1、如果已经在数据中心部署了 NSX-T Data Center，并实现了在数据中心内部的微分段，这时我们就直接在数据中心内部部署 CSM。部署 CSM使用的 OVA 与 NSX-T Manager Appliance 是一样的，在部署过程中选择部署 CSM 即可。如果没有部署 NSX-T Data Center，先部署 NSX-T Data Center，完成部署 CSM 后，在 CSM 的页面中加入 NSX-T Data Center 的帐号，然后在加入 AWS 和 Azure 的帐号同步云上的资源清单，如下图所示 ：</p>
+<p>　　<img src="/posts/59508/647.png" class=""></p>
+<p>　　2、点击 instances 或 VPC/VNET，可以查看到云上的详细信息。</p>
+<p>　　<img src="/posts/59508/648.png" class=""></p>
+<p>　　<strong>3、</strong>在 AWS/Azure 的 Transit VPC/VNET 中部署 PCG，部署 PCG 的时候，选择 PCG 所使用的 subnet。</p>
+<p>　　<img src="/posts/59508/649.png" class=""></p>
+<p> 　PCG 部署成功后，如下图所示：</p>
+<p>　　<img src="/posts/59508/650.png" class=""></p>
+<p>　　<strong>4、</strong>如果采用代理方式，需要在实例中安装 NSX tools，如下图所示：</p>
+<p>　　<img src="/posts/59508/651.png" class=""></p>
+<p>　　<strong>5、</strong>在实例中安装 NSX tools 后，这个实例成为了 NSX managed 的实例，这时我们就可以在 NSX 的界面中发现这个实例以及实例上的标记，在 NSX 可以针对标记创建动态安全组来实现微分段的策略。</p>
+<p>　　<strong>6、</strong>如果其它 VPC/VNET 中的实例也需要一致的安全策略，这时需要将其它的计算 VPC/VNET 链接到 Transit VPC/VNET 来共享 PCG，然后在计算 VPC/VNET 中的实例中安装 NSX tools。如下图所示：</p>
+<p>　　<img src="/posts/59508/652.png" class=""></p>
+<p>　　<strong>总结</strong></p>
+<p>　　在应用迁移到了公有云的进程中，如果客户数据中心已经使用了 NSX 的微分段来实施安全策略，那么我们就可以通过 NSX Cloud 将私有云、原生公有云上的工作负载统一实施安全策略，不需要对私有云以及公有云的网络架构进行修改，就可以实现私有云和公有云一致的安全策略交付，简化了安全的运维工作，同时提供了安全的可视性。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:gaoshuais@126.com">gaoshuai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.gaoshuais.top/posts/59508/">https://www.gaoshuais.top/posts/59508/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.gaoshuais.top" target="_blank">HILL</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/NSX-T/">NSX-T</a></div><div class="post_share"><div class="social-share" data-image="/img/head.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/8475/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">关于 NSX-T 下的 MTU（上）</div></div></a></div><div class="next-post pull-right"><a href="/posts/35722/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vSAN 版本目录更新</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/8475/" title="关于 NSX-T 下的 MTU（上）"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-22</div><div class="title">关于 NSX-T 下的 MTU（上）</div></div></a></div><div><a href="/posts/56602/" title="关于 NSX-T 下的 MTU（下）"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-22</div><div class="title">关于 NSX-T 下的 MTU（下）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">gaoshuai</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoshuais/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">随缘更新</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%BA%91%E7%BD%91%E7%BB%9C%E4%B8%93%E8%BE%91%EF%BD%9C%E5%A4%9A%E4%BA%91%E6%97%B6%E4%BB%A3%E7%9A%84%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8"><span class="toc-number">1.</span> <span class="toc-text">虚拟云网络专辑｜多云时代的网络安全</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/56602/" title="关于 NSX-T 下的 MTU（下）">关于 NSX-T 下的 MTU（下）</a><time datetime="2022-04-22T01:47:42.000Z" title="发表于 2022-04-22 09:47:42">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/8475/" title="关于 NSX-T 下的 MTU（上）">关于 NSX-T 下的 MTU（上）</a><time datetime="2022-04-22T01:36:07.000Z" title="发表于 2022-04-22 09:36:07">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/59508/" title="虚拟云网络专辑｜多云时代的网络安全">虚拟云网络专辑｜多云时代的网络安全</a><time datetime="2022-04-22T01:26:33.000Z" title="发表于 2022-04-22 09:26:33">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/35722/" title="vSAN 版本目录更新">vSAN 版本目录更新</a><time datetime="2022-04-22T01:16:56.000Z" title="发表于 2022-04-22 09:16:56">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/50626/" title="vSAN 删除不可访问的对象">vSAN 删除不可访问的对象</a><time datetime="2022-04-21T11:51:51.000Z" title="发表于 2022-04-21 19:51:51">2022-04-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By gaoshuai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '86MGRvKe88fxFgDHAqjUQBbr-gzGzoHsz',
+      appKey: 'NCmk6LfPzxxN4NPnVFQEQ75H',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideCategory.min.js"></script> - <script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/mouse_snow.min.js"></script> - <script src="/js/live2d.min.js"></script> - <script src="/js/waifu-tips.js"></script> - <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener toc scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":180,"height":360},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

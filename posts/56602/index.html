@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>关于 NSX-T 下的 MTU（下） | HILL</title><meta name="keywords" content="NSX-T"><meta name="author" content="gaoshuai,gaoshuais@126.com"><meta name="copyright" content="gaoshuai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="关于 NSX-T 下的 MTU（下）原创 Spark go nsx很可爱的 在实施 NSX-v 或者 NSX-T 的项目时，经常听到一个词：MTU，本文着重讲讲为什么 MTU 在 NSX 环境中如此重要，如何根据不同的设计来配置&#x2F;验证 MTU 等等，本文适合先收藏，后转发。 本文目录如下： 上篇：  如果在 NSX 环境下 MTU 设置不正确会有什么现象？ 如何验证 MTU 设置是否正确？ 在 N">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 NSX-T 下的 MTU（下）">
+<meta property="og:url" content="https://www.gaoshuais.top/posts/56602/index.html">
+<meta property="og:site_name" content="HILL">
+<meta property="og:description" content="关于 NSX-T 下的 MTU（下）原创 Spark go nsx很可爱的 在实施 NSX-v 或者 NSX-T 的项目时，经常听到一个词：MTU，本文着重讲讲为什么 MTU 在 NSX 环境中如此重要，如何根据不同的设计来配置&#x2F;验证 MTU 等等，本文适合先收藏，后转发。 本文目录如下： 上篇：  如果在 NSX 环境下 MTU 设置不正确会有什么现象？ 如何验证 MTU 设置是否正确？ 在 N">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gaoshuais.top/img/head.jpg">
+<meta property="article:published_time" content="2022-04-22T01:47:42.000Z">
+<meta property="article:modified_time" content="2022-04-22T01:56:53.076Z">
+<meta property="article:author" content="gaoshuai">
+<meta property="article:tag" content="NSX-T">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gaoshuais.top/img/head.jpg"><link rel="shortcut icon" href="/img/head.jpg"><link rel="canonical" href="https://www.gaoshuais.top/posts/56602/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于 NSX-T 下的 MTU（下）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-22 09:56:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/staticbutterfly.css"><link rel="stylesheet" href="/css/waifu1.css"><link rel="stylesheet" href="/css/flat-ui.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HILL" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HILL</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">关于 NSX-T 下的 MTU（下）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-22T01:47:42.000Z" title="发表于 2022-04-22 09:47:42">2022-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-22T01:56:53.076Z" title="更新于 2022-04-22 09:56:53">2022-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="关于 NSX-T 下的 MTU（下）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="关于-NSX-T-下的-MTU（下）"><a href="#关于-NSX-T-下的-MTU（下）" class="headerlink" title="关于 NSX-T 下的 MTU（下）"></a>关于 NSX-T 下的 MTU（下）</h1><p>原创 Spark go nsx很可爱的</p>
+<p>在实施 NSX-v 或者 NSX-T 的项目时，经常听到一个词：MTU，本文着重讲讲为什么 MTU 在 NSX 环境中如此重要，如何根据不同的设计来配置/验证 MTU 等等，本文适合先收藏，后转发。</p>
+<p>本文目录如下：</p>
+<p>上篇：</p>
+<ul>
+<li>如果在 NSX 环境下 MTU 设置不正确会有什么现象？</li>
+<li>如何验证 MTU 设置是否正确？</li>
+<li>在 NSX-T 环境下如何设置 MTU？</li>
+</ul>
+<p>下篇：</p>
+<ul>
+<li>为什么 NSX 环境中 MTU 如此重要？有没有 workaround？</li>
+<li>NSX 多中心架构下对于 MTU 的优化</li>
+</ul>
+<h2 id="为什么-NSX-环境中-MTU-如此重要？有没有-workaround？"><a href="#为什么-NSX-环境中-MTU-如此重要？有没有-workaround？" class="headerlink" title="为什么 NSX 环境中 MTU 如此重要？有没有 workaround？"></a>为什么 NSX 环境中 MTU 如此重要？有没有 workaround？</h2><p>NSX 是一种 Overlay 网络，其原理就是在已有的物理网络上构建一层虚拟的网络，为了实现虚拟网络和物理网络的解耦，需要用到一种封装协议，NSX-V 使用 vxlan，NSX-T 使用 Geneve，无论哪种，其原理都是在虚拟机的原始报文上再加一个新的包头。</p>
+<img src="/posts/56602/640.png" class="">
+
+<p>这就导致，原始虚拟机发出的 IP 报文大小为 1500，经过封装后的报文可能变成了 1550 甚至更大。</p>
+<p>注：1550 = （原始 IP 报文 1500 +虚拟机以太网包头 14 bytes + Geneve Header 8 bytes + UDP header 8 bytes + TEP IP header 20 bytes）。</p>
+<p>为了避免封装后的包被底层物理网络丢弃，需要将底层网络的 MTU 调整为 ≥1600。</p>
+<p>在 NSX-T 下，虚拟机跨主机通信的流量示意图如下：</p>
+<img src="/posts/56602/641.png" class="">
+
+<h3 id="关于-MTU"><a href="#关于-MTU" class="headerlink" title="关于 MTU"></a>关于 MTU</h3><p>MTU 全称为 Maximum Transmission Unit，在以太网中表示数据链路层允许通过的最大 IP 报文大小。一般常见的网络设备 MTU 默认均为 1500 字节。</p>
+<p>关于 MTU 有个形象的比喻：</p>
+<p>如果把 IP 报文形容成<strong>货车</strong>，MTU 就等于沿途所有隧道、桥梁、高速路的<strong>限高</strong>。只要货车的高度在所有线路上都低于限高，那么货车就能顺利抵达目的地。无论沿途线路限高是多少，都不会改变货车的高度。</p>
+<p>在 IP 网络中，MTU 就是一个<strong>当前节点的限制</strong>。虚拟机发出的 IP 包为 1500 bytes，NSX 封装后变成 &gt;1550 bytes，为了避免封装后的包被丢弃，最简单的办法就是<strong>提高沿途所有设备的 MTU</strong>。</p>
+<h3 id="有没有-Workaround？"><a href="#有没有-Workaround？" class="headerlink" title="有没有 Workaround？"></a>有没有 Workaround？</h3><p>聪明的你可能想到，如果从源头出发，让虚拟机一开始发出的报文就比标准的 1500 小，这样不就不需要更改沿途设备的 MTU？</p>
+<p>答案是：或许可以，但不建议。</p>
+<p>以一个 NSX 环境下普通的 TCP 通信为例，Client 与 NSX 中的 VM 通信过程如下：</p>
+<p>在 TCP 三次握手时，相互会通告自己的 TCP Maximum Segment Size（MSS），这个 MSS=(接口 MTU)-(IP 包头)-(TCP 包头)，一般 MTU=1500 时，MSS 为 1460。建立 TCP 连接的双方会取最小值来进行后续数据包的传输。</p>
+<img src="/posts/56602/642.png" class="">
+
+<img src="/posts/56602/643.png" class="">
+
+<p>后续 VM 和 Client 通信的 IP 包大小为 1500，加上 Geneve 封装后的 IP 包变成 1558 bytes。这是一个正常 NSX 环境下预期的结果：</p>
+<img src="/posts/56602/644.png" class="">
+
+<p>如果我们把虚拟机的网卡 MTU 调整成 1400：</p>
+<img src="/posts/56602/645.png" class="">
+
+<p>再次进行 TCP 访问抓包，结果如下：</p>
+<p>Client 发给 VM 的 MSS 依然是 1460：</p>
+<img src="/posts/56602/646.png" class="">
+
+<p>VM 发给 Client 的 MSS 变成了 1360：</p>
+<img src="/posts/56602/647.png" class="">
+
+<p><strong>最终 VM 和 Client 通信时的包都会等于 1400</strong>，<strong>经过 Geneve 封装后的 IP 报文变成了 1458，小于标准的 1500。</strong></p>
+<img src="/posts/56602/648.png" class="">
+
+<p>综上：如果在 NSX 环境下使用 TCP 协议，沿途设备的 MTU 不能更改，那么将虚拟机网卡的 MTU 调整为 1400 可以避开 NSX MTU 问题。这样做的缺点是：每台在 NSX 环境中的虚拟机都得改网卡 MTU，工作量比较大，有些操作系统可能还不支持更改 MTU。</p>
+<p>而 UDP 包的情况则复杂一些。</p>
+<p>UDP 是一个不可靠的协议，UDP 并不管上层应用发了多大的包，只管封装 UDP 包头丢给网络层。对端能不能成功收到数据 UDP 并不管，要靠上层应用来保证。</p>
+<p>图源：网络</p>
+<img src="/posts/56602/649.png" class="">
+
+<p>当环境中 MTU 出现不一致时，很可能源端成功发送，但目标端未成功接收。</p>
+<p>例如 VM MTU 设置为 1400，Client MTU 使用默认的 1500 时：</p>
+<ul>
+<li>VM 给 Client 发送 UDP 包时，IP 包大小为 1400，Client 可以正常接收；</li>
+<li>但 Client 给 VM 发送 UDP 包时，IP 包大小为 1500，大于 VM 的 MTU，VM 无法接收 UDP 包。</li>
+</ul>
+<p>因此如果要使用 UDP 通信，应用侧要有手段来避开底层可能存在的差异。</p>
+<p>可能的方法有：</p>
+<ul>
+<li>应用在发包时使用较小的报文，使得最终 IP 包远小于 1500。比如 Horizon 的 PCoIP 协议默认 Session MTU 为 1300 bytes；</li>
+<li>使用 Path MTU Discovery 技术来发现路径中支持的最大 MTU，应用在后期传输数据时，限制包的大小（参考：RFC 8899 及 RFC 4821）；</li>
+<li>应用通过自己的方式来确定可以发送的包大小。比如 iperf 3.1.5 开始就能自动通过 TCP 先协商出包大小，再进行 UDP 传输（对于 iperf 来说通过这种方式实现最简单，因为 iperf 的控制平面始终会使用 tcp 连接）。</li>
+</ul>
+<p>下图为 iperf3 自动协商 UDP 包大小的截图： </p>
+<img src="/posts/56602/650.png" class="">
+
+<p>综上：如果在 NSX 环境下使用 UDP 协议，沿途设备的 MTU 不能更改，这时候即使改小了 VM 的 MTU，也不一定能保证 Client 到 VM 可以顺利通信，要视业务而定。</p>
+<h3 id="有没有其他-Workaround？"><a href="#有没有其他-Workaround？" class="headerlink" title="有没有其他 Workaround？"></a>有没有其他 Workaround？</h3><p>之前和一些客户讨论 NSX MTU 问题时，会经常被问到：封装完的包如果过大时不应该会自动分片吗？</p>
+<p>要回答这个问题，得去先了解什么情况下会出现分片，谁来执行分片。</p>
+<p>默认情况下，如果应用层发了一个大包到传输层，TCP 会自动切分成小包再发给网络层，UDP 则直接封包丢给网络层。因此源端发送 TCP 报文时一般不会出现 IP 分片，源端发送 UDP 报文时则可能出现 <strong>IP 分片</strong>。</p>
+<p>比如 iperf 3.1.3 及更老的版本下默认发出的包为 8192 字节，当发出后就会被底层切成很多块发送，每个 IP 包的大小 ≤ 1500 字节。</p>
+<p><img src="https://img2020.cnblogs.com/blog/2565133/202110/2565133-20211011100548849-1596279974.gif" alt="图片"></p>
+<p>数据包一旦从源端网卡发送出来，<strong>沿途的设备通常不会更改这个包的</strong>，如果包大小满足当前节点的 MTU 配置，包可以被正常转发；如果包大小不满足当前节点的 MTU 配置，包被丢弃。</p>
+<p>但这里有个例外，那就是 <strong>IP 包头中的 DF 位 = 0 时，沿途的路由器（三层设备）会执行 IP 分片</strong>。当 DF 位 = 0 时，表示该 IP 包可以被分片，沿途三层设备如果发现收到的包大于自己的 L3 MTU 设置，就会根据自己的 L3 MTU 设置来进行分片然后发送，目标端收到所有报文后进行重组。</p>
+<p>图源：Wikipedia</p>
+<img src="/posts/56602/651.png" class="">
+
+<p>以上便是两种会分片的情况，现实中两种情况都很少遇到，上个章节中已经提到，通常 TCP 会自行协商包大小，UDP 协议下也有多种方式来尽量避开发送过大的包。</p>
+<p>其实虽然存在 IP 分片这种技术，但并不建议使用，因为分片会存在下列问题：</p>
+<ul>
+<li>传输的报文数量增大，降低传输性能；</li>
+<li>对于 TCP 这类可靠协议，如果一个 IP 分片丢失，一个会话的所有 TCP segment 都要重传，效率降低；</li>
+<li>IP 分片存在脆弱性，不应该被使用（详见：<a target="_blank" rel="noopener" href="https://tools.ietf.org/id/draft-ietf-intarea-frag-fragile-14.html#rfc.section.3%EF%BC%89">https://tools.ietf.org/id/draft-ietf-intarea-frag-fragile-14.html#rfc.section.3）</a></li>
+</ul>
+<p>再回到 NSX 环境，NSX 的工作原理和传统的二三层设备有很大不同，它并不去查看虚拟机发出或者收到的包是什么内容，因此传统的 IP 分片技术在 NSX 下并不奏效。对于 NSX 而言，任何经由它的数据包均是“应用层”的包，它只需要负责 GENEVE 封装，然后丢给传输层转发即可。</p>
+<p>单纯从技术角度来看，NSX 可以视为一个新的源端，理论上 NSX 可以对收到的包重新进行加工，减少包大小，但这种设计并不值得，因为同样会存在和 IP 分片类似的问题，同时也会消耗很多服务器 CPU 资源。</p>
+<p>与其这样，不如让沿途的其他设备来修改 MTU，真的鲜有设备不能更改 MTU。</p>
+<p>话虽这么说，但有时候真的会碰到不能更改 MTU 的地方，比如运营商的专线。</p>
+<h2 id="NSX-多中心架构下对于-MTU-的优化"><a href="#NSX-多中心架构下对于-MTU-的优化" class="headerlink" title="NSX 多中心架构下对于 MTU 的优化"></a>NSX 多中心架构下对于 MTU 的优化</h2><p>NSX-T 在 3.0 版本推出了全新的多数据中心网络安全解决方案：Federation（中文：联邦或者联合）。</p>
+<p>在联邦架构下，NSX 在控制层面做了分离，跨多个数据中心的网络和安全配置统一由全局管理器（Global NSX-T Manager）来负责；而本地的网络和安全配置以及控制层面由每个中心的本地管理器负责（Local NSX-T Manager）。</p>
+<p>在这种统一管理、分布式处理的架构能非常好的应对各种站点级故障，快速进行网络层的故障切换。</p>
+<p><img src="https://img2020.cnblogs.com/blog/2565133/202110/2565133-20211011100548849-1596279974.gif" alt="图片"></p>
+<p>在 NSX-T Federation 下有个小的优化：<strong>跨数据中心的网络</strong>不再强制要求为 MTU ≥ 1600，而改为<strong>建议 MTU ≥ 1700</strong>。这背后的变化便是，NSX 支持跨中心流量的“分片”了！这项功能就是为了解决多数据中心环境下使用运营商的租用线路，而租用线路无法更改 MTU 的场景。</p>
+<p>在 Federation 架构下会存在两种 Tunnel Endpoint：</p>
+<ul>
+<li>一种是普通的 TEP，在本地数据中心内，业务流量在 ESXi 和 Edge 间传输时会使用 TEP 封装；</li>
+<li>另一种是跨中心的 TEP：Remote TEP，所有跨中心的通信会经由 RTEP 封装传输，RTEP 仅存在于 Edge 节点上，ESXi 不会有 RTEP。</li>
+</ul>
+<img src="/posts/56602/652.png" class="">
+
+<p>前面说了一大堆 IP 分片的不好，NSX Federation 也在尽可能减少 IP 分片。</p>
+<p>针对 TCP 流量，Federation 会修改途径流量的 MSS 来让源/目标发送的报文小于标准大小 1500，这样可以避免 IP 分片。</p>
+<img src="/posts/56602/653.png" class="">
+
+<p>而针对 UDP 流量，直接使用了标准的 IP 分片特性。</p>
+<img src="/posts/56602/654.png" class="">
+
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>其实不仅是 NSX，在容器化环境中也经常会遇到 MTU 设置问题，很多 CNI 网络插件也是 Overlay 模型，会使用 VXLAN 等协议封装容器的流量进行跨节点传输，为了避免 IP 分片等问题，创建出来的容器 MTU 都会小于标准的 1500，比如下表是 Calico 关于 MTU 设置的介绍：</p>
+<img src="/posts/56602/656.png" class="">
+
+<p>另外目前很多 CNI 的性能测试中都会有 MTU=9000 的测试结果，在 10G 网络下 MTU 对于性能的影响还不是很大，到了25G 或者 40G 以上时，MTU 可以很大程度地提高吞吐量。目前连 AWS 公有云都支持 Jumbo Frame。</p>
+<p>无论从哪种角度，本地数据中心都应该尽可能提高 MTU 以应对未来的各种新平台新应用。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:gaoshuais@126.com">gaoshuai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.gaoshuais.top/posts/56602/">https://www.gaoshuais.top/posts/56602/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.gaoshuais.top" target="_blank">HILL</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/NSX-T/">NSX-T</a></div><div class="post_share"><div class="social-share" data-image="/img/head.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/8475/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">关于 NSX-T 下的 MTU（上）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/8475/" title="关于 NSX-T 下的 MTU（上）"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-22</div><div class="title">关于 NSX-T 下的 MTU（上）</div></div></a></div><div><a href="/posts/59508/" title="虚拟云网络专辑｜多云时代的网络安全"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-22</div><div class="title">虚拟云网络专辑｜多云时代的网络安全</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">gaoshuai</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gaoshuais/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">随缘更新</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-NSX-T-%E4%B8%8B%E7%9A%84-MTU%EF%BC%88%E4%B8%8B%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">关于 NSX-T 下的 MTU（下）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-NSX-%E7%8E%AF%E5%A2%83%E4%B8%AD-MTU-%E5%A6%82%E6%AD%A4%E9%87%8D%E8%A6%81%EF%BC%9F%E6%9C%89%E6%B2%A1%E6%9C%89-workaround%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">为什么 NSX 环境中 MTU 如此重要？有没有 workaround？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-MTU"><span class="toc-number">1.1.1.</span> <span class="toc-text">关于 MTU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%B2%A1%E6%9C%89-Workaround%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">有没有 Workaround？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%B2%A1%E6%9C%89%E5%85%B6%E4%BB%96-Workaround%EF%BC%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">有没有其他 Workaround？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSX-%E5%A4%9A%E4%B8%AD%E5%BF%83%E6%9E%B6%E6%9E%84%E4%B8%8B%E5%AF%B9%E4%BA%8E-MTU-%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">NSX 多中心架构下对于 MTU 的优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">1.3.</span> <span class="toc-text">写在最后</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/56602/" title="关于 NSX-T 下的 MTU（下）">关于 NSX-T 下的 MTU（下）</a><time datetime="2022-04-22T01:47:42.000Z" title="发表于 2022-04-22 09:47:42">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/8475/" title="关于 NSX-T 下的 MTU（上）">关于 NSX-T 下的 MTU（上）</a><time datetime="2022-04-22T01:36:07.000Z" title="发表于 2022-04-22 09:36:07">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/59508/" title="虚拟云网络专辑｜多云时代的网络安全">虚拟云网络专辑｜多云时代的网络安全</a><time datetime="2022-04-22T01:26:33.000Z" title="发表于 2022-04-22 09:26:33">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/35722/" title="vSAN 版本目录更新">vSAN 版本目录更新</a><time datetime="2022-04-22T01:16:56.000Z" title="发表于 2022-04-22 09:16:56">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/50626/" title="vSAN 删除不可访问的对象">vSAN 删除不可访问的对象</a><time datetime="2022-04-21T11:51:51.000Z" title="发表于 2022-04-21 19:51:51">2022-04-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By gaoshuai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '86MGRvKe88fxFgDHAqjUQBbr-gzGzoHsz',
+      appKey: 'NCmk6LfPzxxN4NPnVFQEQ75H',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideCategory.min.js"></script> - <script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/mouse_snow.min.js"></script> - <script src="/js/live2d.min.js"></script> - <script src="/js/waifu-tips.js"></script> - <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener toc scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":180,"height":360},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
