@@ -221,20 +221,6 @@
 
   
   <url>
-    <loc>https://www.gaoshuais.top/tags/route/</loc>
-    <lastmod>2022-04-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.gaoshuais.top/tags/MacOS/</loc>
-    <lastmod>2022-04-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.gaoshuais.top/tags/Zabbix/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
@@ -249,7 +235,21 @@
   </url>
   
   <url>
+    <loc>https://www.gaoshuais.top/tags/MacOS/</loc>
+    <lastmod>2022-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.gaoshuais.top/tags/Photoshop/</loc>
+    <lastmod>2022-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.gaoshuais.top/tags/route/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -270,14 +270,14 @@
   </url>
   
   <url>
-    <loc>https://www.gaoshuais.top/tags/K8S/</loc>
+    <loc>https://www.gaoshuais.top/tags/vSAN/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.gaoshuais.top/tags/vSAN/</loc>
+    <loc>https://www.gaoshuais.top/tags/K8S/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
