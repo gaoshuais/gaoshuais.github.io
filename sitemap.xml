@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.gaoshuais.top/posts/58807/</loc>
+    
+    <lastmod>2022-04-24</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.gaoshuais.top/posts/33745/</loc>
     
     <lastmod>2022-04-24</lastmod>
@@ -228,20 +235,6 @@
 
   
   <url>
-    <loc>https://www.gaoshuais.top/tags/Zabbix/</loc>
-    <lastmod>2022-04-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.gaoshuais.top/tags/CentOS/</loc>
-    <lastmod>2022-04-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.gaoshuais.top/tags/MacOS/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
@@ -256,7 +249,14 @@
   </url>
   
   <url>
-    <loc>https://www.gaoshuais.top/tags/route/</loc>
+    <loc>https://www.gaoshuais.top/tags/Zabbix/</loc>
+    <lastmod>2022-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.gaoshuais.top/tags/CentOS/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -264,6 +264,13 @@
   
   <url>
     <loc>https://www.gaoshuais.top/tags/Photoshop/</loc>
+    <lastmod>2022-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.gaoshuais.top/tags/route/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -320,6 +327,13 @@
   
   <url>
     <loc>https://www.gaoshuais.top/tags/NSX-T/</loc>
+    <lastmod>2022-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.gaoshuais.top/tags/Exsi/</loc>
     <lastmod>2022-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
